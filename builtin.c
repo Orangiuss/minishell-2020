@@ -7,6 +7,8 @@
     Dépendances : builtin.h
  */
 
+extern char **environ;
+
 int cd(const char* path) {
 	if (chdir(path) == -1) {
 		perror("chdir()");
@@ -16,6 +18,7 @@ int cd(const char* path) {
 
 int export(const char* env) {
 	printf("EXPORT\n");
+	//setenv(const char *name, const char *value, int overwrite);
 }
 
 int unset(const char* env, int fderr) {
@@ -24,6 +27,10 @@ int unset(const char* env, int fderr) {
 
 int env(int fdout, int fderr) {
 	printf("ENV\n");
+	int i;
+   	for (i=0 ; environ[i]!=NULL ; i++)
+      puts(environ[i]);
+   	return 0;
 }
 
 int exitbuilt(int val, int fdout, int fderr) {
@@ -61,4 +68,6 @@ void exec_builtin(char **cmd)
 		export(cmd[1]);
 	else if (!strcmp(cmd[0], "cwd"))
 		cwd(NULL,NULL);
+	else if (!strcmp(cmd[0], "env"))
+		env(NULL,NULL);
 }
