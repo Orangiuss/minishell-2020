@@ -7,18 +7,22 @@
     Dépendances : builtin.h
  */
 
-extern char **environ;
-
 int cd(const char* path) {
 	if (chdir(path) == -1) {
-		perror("chdir()");
+		perror("cd");
 	}
 	return 0;
 }
 
-int export(const char* env) {
+int export(char* env) {
 	printf("EXPORT\n");
-	//setenv(const char *name, const char *value, int overwrite);
+	char *p = strtok(env,"=");
+	if(p = strtok(NULL, "")) {
+		setenv(env, p, 0);
+	}
+	else {
+		perror("export");
+	}
 }
 
 int unset(const char* env, int fderr) {

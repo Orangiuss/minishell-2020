@@ -2,7 +2,9 @@
 #define BUILTIN_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <linux/limits.h>
+#include <string.h>
 
 /*
     Fichier builtin.h : En-tête des fonctions des commandes
@@ -12,11 +14,13 @@
     Dépendances :
  */
 
+extern char **environ;
+
 static const char *built_in[] = {"cd", "export", "unset", "env", "exit", "cwd"};
 
 int cd(const char* path);
 
-int export(const char* env);
+int export(char* env);
 
 int unset(const char* env, int fderr);
 

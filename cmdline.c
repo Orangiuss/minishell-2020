@@ -78,6 +78,7 @@ int init_process(processus_t *proc, char *tokens[])
         // "ls -l > test | ls"
         proc[proc_idx].argv[i++] = tokens[tok_idx++];
     }
+    return 0;
 }
 
 int exec_cmdline(processus_t *proc)
@@ -110,4 +111,5 @@ int exec_cmdline(processus_t *proc)
         }
         i++;
     }
+    return 0;
 }

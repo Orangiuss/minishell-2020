@@ -14,7 +14,7 @@ int main(int argc, char **argv, char **envp)
 	while(1) {
         if (getcwd(cwd, sizeof(cwd)) != NULL) {
            printf("karim@minishell:");
-           printf("\033[31m\033[1m%s\033[0m~$", cwd);
+           printf("\033[31m\033[1m%s\033[0m~$ ", cwd);
         } else {
             perror("getcwd()");
         }
