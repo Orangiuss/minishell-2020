@@ -1,16 +1,16 @@
 exec: build
 	@echo "\033[31m\033[1mExecution du minishell :\033[0m"
-	@./build
+	@./exe
 
 execrb: rebuild
 	@echo "\033[31m\033[1mExecution du minishell :\033[0m"
-	@./build
+	@./exe
 
 rebuild: mrproper build
 
 build: main.o cmdline.o parser.o processus.o utils.o
 	@echo "\033[31m\033[1mCreation de l'executable :\033[0m"
-	@gcc -o build main.o cmdline.o parser.o processus.o utils.o -Wall
+	@gcc -o exe main.o cmdline.o parser.o processus.o utils.o -Wall
 	@echo "\033[31m\033[1mCreation de l'executable effectuée\033[0m"
 
 main.o: main.c
@@ -45,4 +45,4 @@ clean:
 mrproper:
 	@echo "\033[31m\033[1mNettoyage des fichiers .o et de l'executable minishell effectuée\033[0m"
 	@rm -rf *.o
-	@rm -rf minishell
+	@rm -rf exe
