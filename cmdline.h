@@ -20,7 +20,7 @@
                           de la ligne de commande à analyser
       Retourne 0 en cas de succés et une autre valeur en cas d'échec
  */
-int init_process(process_t *proc, char *tokens[]);
+int init_process(processus_t *proc, char *tokens[]);
 
 /*
   Fonction exec_cmdline : Lance les processus de la ligne de commande dans
@@ -28,7 +28,7 @@ int init_process(process_t *proc, char *tokens[]);
       Paramètre proc : la structure décrivant les processus à lancer
       Retroune 0 en cas de succés et une autre valeur en cas d'échec
  */
-int exec_cmdline(process_t *proc);
+int exec_cmdline(processus_t *proc);
 
 
 #endif

@@ -1,6 +1,6 @@
 #include "cmdline.h"
 
-int init_process(process_t *proc, char *tokens[])
+int init_process(processus_t *proc, char *tokens[])
 {
     for(int i = 0; i < MAX_ARGS; i++) {
         clear_tokens(proc[i].argv);
@@ -66,7 +66,7 @@ int init_process(process_t *proc, char *tokens[])
         }
 }
 
-int exec_cmdline(process_t *proc)
+int exec_cmdline(processus_t *proc)
 {
 	
 }
