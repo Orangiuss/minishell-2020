@@ -6,6 +6,7 @@
 #include <wait.h>
 
 #include "parser.h"
+#include "builtin.h"
 
 /*
     Fichier process.h : En-tête des fonctions de gestion des

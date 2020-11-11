@@ -13,11 +13,11 @@ int main()
     pipe(tube);
     
     if(!(pid = fork())) {
-        dup2(tube[1], STDOUT_FILENO);
+        dup2(tube[1], 1);
         close(tube[0]);
         execvp(ls_cmd[0], ls_cmd);
     } else {
-        dup2(tube[0], STDIN_FILENO);
+        dup2(tube[0], 0);
         close(tube[1]);
         execvp(cw_cmd[0], cw_cmd);
     }

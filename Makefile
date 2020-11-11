@@ -8,9 +8,9 @@ execrb: rebuild
 
 rebuild: mrproper build
 
-build: main.o cmdline.o parser.o processus.o utils.o
+build: main.o cmdline.o parser.o processus.o utils.o builtin.o
 	@echo "\033[31m\033[1mCreation de l'executable :\033[0m"
-	@gcc -o exe main.o cmdline.o parser.o processus.o utils.o -Wall
+	@gcc -o exe main.o cmdline.o parser.o processus.o utils.o builtin.o -Wall
 	@echo "\033[31m\033[1mCreation de l'executable effectuée\033[0m"
 
 main.o: main.c
@@ -38,6 +38,11 @@ utils.o: utils.c
 	@gcc -o utils.o -c utils.c -Wall 
 	@echo "\033[31m\033[1mCompilation de utils.c effectuée\033[0m"
 
+builtin.o: builtin.c
+	@echo "\033[31m\033[1mCompilation de builtin.c :\033[0m"
+	@gcc -o builtin.o -c builtin.c -Wall 
+	@echo "\033[31m\033[1mCompilation de builtin.c effectuée\033[0m"
+
 clean:
 	@echo "\033[31m\033[1mNettoyage des fichiers .o effectuée\033[0m"
 	@rm -rf *.o
@@ -45,4 +50,10 @@ clean:
 mrproper:
 	@echo "\033[31m\033[1mNettoyage des fichiers .o et de l'executable minishell effectuée\033[0m"
 	@rm -rf *.o
+	@rm -rf exe
+
+mrproper2:
+	@echo "\033[31m\033[1mNettoyage des fichiers .o et .txt et de l'executable minishell effectuée\033[0m"
+	@rm -rf *.o
+	@rm -rf *.txt
 	@rm -rf exe

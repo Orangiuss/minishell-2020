@@ -5,12 +5,19 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	char str[MAX_ARGS]; // TODO: Replace MAX_ARGS by MAX_LINE_SIZE
+	char str[MAX_LINE_SIZE];
 	char *tokens[MAX_ARGS];
     processus_t proc[MAX_ARGS];
 
+    char cwd[PATH_MAX];
+
 	while(1) {
-    	printf("karim@minishell:~$ ");
+        if (getcwd(cwd, sizeof(cwd)) != NULL) {
+           printf("karim@minishell:");
+           printf("\033[31m\033[1m%s\033[0m~$", cwd);
+        } else {
+            perror("getcwd()");
+        }
     	fgets(str, MAX_ARGS, stdin);
     	strtok(str, "\n");
     	int nombreArgs = tokenize_str(str, tokens);
