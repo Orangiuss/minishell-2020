@@ -45,6 +45,7 @@ int unset(const char* env, int fderr) {
 		if (env!=NULL)
 		{
 			env=NULL;
+			perror("unset");
 		}
 		return 0;
 	}
