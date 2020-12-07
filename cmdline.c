@@ -88,28 +88,31 @@ int exec_cmdline(processus_t *proc)
         printf("%d. %s\n", i, proc[i].argv[0]);
     }*/
     int i = 0;
-    while(i < MAX_ARGS) {
-        printf("Executing %s...\n", proc[i].argv[0]);
-        exec_processus(&proc[i]);
-        sleep(1);
-        if(proc[i].next != NULL) {
-            printf("Executing %s...\n", proc[i].next->argv[0]);
-            exec_processus(proc[i].next);
+    printf("%d. %d\n", 0, proc[0].argv[0]);
+    if(proc[i].argv[0]!=1913398976) {
+        while(i < MAX_ARGS) {
+            printf("Executing %s...\n", proc[i].argv[0]);
+            exec_processus(&proc[i]);
+            sleep(1);
+            if(proc[i].next != NULL) {
+                printf("Executing %s...\n", proc[i].next->argv[0]);
+                exec_processus(proc[i].next);
+                i++;
+            }
+            int status = status_processus(&proc[i]);
+            if(proc[i].next_success != NULL) {
+                if(status == 0) exec_processus(proc[i].next_success);
+                i++;
+            }
+            if(proc[i].next_failure != NULL) {
+                if(status != 0) exec_processus(proc[i].next_failure);
+                i++;
+            }
+            if(proc[i].next == NULL && proc[i].next_success == NULL && proc[i].next_failure == NULL) {
+                break;
+            }
             i++;
         }
-        int status = status_processus(&proc[i]);
-        if(proc[i].next_success != NULL) {
-            if(status == 0) exec_processus(proc[i].next_success);
-            i++;
-        }
-        if(proc[i].next_failure != NULL) {
-            if(status != 0) exec_processus(proc[i].next_failure);
-            i++;
-        }
-        if(proc[i].next == NULL && proc[i].next_success == NULL && proc[i].next_failure == NULL) {
-            break;
-        }
-        i++;
     }
     return 0;
 }

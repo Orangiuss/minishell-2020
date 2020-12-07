@@ -11,7 +11,6 @@
 int exec_processus(processus_t *proc)
 {
     printf("%s executed\n", proc->argv[0]);
-    if(!is_builtin(proc->argv[0])) {
         if((proc->pid = fork()) == 0) {
             dup2(proc->stdin, 0);
             dup2(proc->stdout, 1);
@@ -22,14 +21,20 @@ int exec_processus(processus_t *proc)
             /*for(int i = 0; i < MAX_ARGS; i++) {
                 if(proc->argv[i] != NULL) printf("%s\n", proc->argv[i]);
             }*/
-            execvp(proc->argv[0], proc->argv);
+            if(!is_builtin(proc->argv[0])) {
+           	 	execvp(proc->argv[0], proc->argv);
+           	}
+            else {
+       		 	exec_builtin(proc->argv);
+    		}
         } else {
-            if(proc->background == 0) waitpid(proc->pid, &proc->status, 0);
+        	if(proc->stdin != 0) close(proc->stdin);
+	        if(proc->stdout != 1) close(proc->stdout);
+	        if(proc->stderr != 2) close(proc->stderr);
+            if(proc->background == 0) {
+            	waitpid(proc->pid, &proc->status, 0);
+            }
         }
-    }
-    else {
-        exec_builtin(proc->argv);
-    }
 
     return 0;
 }
