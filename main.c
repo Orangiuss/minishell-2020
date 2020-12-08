@@ -19,6 +19,7 @@ int main(int argc, char **argv, char **envp)
             perror("getcwd()");
         }
     	fgets(str, MAX_ARGS, stdin);
+    	printf("%s", str);
     	strtok(str, "\n");
     	int nombreArgs = tokenize_str(str, tokens);
     	env_str(tokens);

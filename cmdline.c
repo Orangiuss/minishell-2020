@@ -23,14 +23,26 @@ int init_process(processus_t *proc, char *tokens[])
             continue;
         }
         if(!strcmp(tokens[tok_idx], ">")) {
-            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_TRUNC, 0440);
+            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_TRUNC, 0660);
             proc[proc_idx].stdout = fd;
             tok_idx+=2;
             continue;
         }
+        if(!strcmp(tokens[tok_idx], "2>")) {
+            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_TRUNC, 0660);
+            proc[proc_idx].stderr = fd;
+            tok_idx+=2;
+            continue;
+        }
         if(!strcmp(tokens[tok_idx], ">>")) {
-            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_APPEND, 0440);
+            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_APPEND, 0660);
             proc[proc_idx].stdout = fd;
+            tok_idx+=2;
+            continue;
+        }
+        if(!strcmp(tokens[tok_idx], "2>>")) {
+            int fd = open(tokens[tok_idx+1], O_WRONLY | O_CREAT | O_APPEND, 0660);
+            proc[proc_idx].stderr = fd;
             tok_idx+=2;
             continue;
         }
@@ -88,14 +100,14 @@ int exec_cmdline(processus_t *proc)
         printf("%d. %s\n", i, proc[i].argv[0]);
     }*/
     int i = 0;
-    printf("%d. %d\n", 0, proc[0].argv[0]);
-    if(proc[i].argv[0]!=1913398976) {
+    //printf("%d. %d\n", 0, proc[0].argv[2]);
+    if(proc[i].argv[0]!=NULL) {
         while(i < MAX_ARGS) {
-            printf("Executing %s...\n", proc[i].argv[0]);
+            printf("\r\nExecuting %s...\r\n", proc[i].argv[0]);
             exec_processus(&proc[i]);
             sleep(1);
             if(proc[i].next != NULL) {
-                printf("Executing %s...\n", proc[i].next->argv[0]);
+                printf("Executing %s...\r\n", proc[i].next->argv[0]);
                 exec_processus(proc[i].next);
                 i++;
             }

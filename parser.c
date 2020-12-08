@@ -67,16 +67,18 @@ int tokenize_str(char *str, char *tokens[])
     return argsCount+1; // argsCount+1 car argsCount commence à 0
 }
 
-int env_str(char *tokens[])
-{
-    char *env;
-    
-    for(int i = 0; i < MAX_ARGS; i++) {
-        if(tokens[i] != NULL) {
-            env = getenv(tokens[i]);
-            if(env != NULL) {
-                tokens[i] = env;
+int env_str(char *tokens[]) {
+    int i=0;
+    char* temp;
+    while(tokens[i]!=NULL) {    
+        if (strncmp (tokens[i],"$",1) == 0)
+        {
+            temp = tokens[i]+1;
+              if(getenv(temp)!=NULL) {
+                tokens[i]=getenv(temp);
             }
         }
+        i++;
     }
+    return 0;    
 }

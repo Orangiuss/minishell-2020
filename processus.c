@@ -10,7 +10,7 @@
 
 int exec_processus(processus_t *proc)
 {
-    printf("%s executed\n", proc->argv[0]);
+    printf("%s executed\r\n", proc->argv[0]);
         if((proc->pid = fork()) == 0) {
             dup2(proc->stdin, 0);
             dup2(proc->stdout, 1);
@@ -25,8 +25,9 @@ int exec_processus(processus_t *proc)
            	 	execvp(proc->argv[0], proc->argv);
            	}
             else {
-       		 	exec_builtin(proc->argv);
+       		 	exec_builtin(proc->argv, proc->stdout, proc->stderr);
     		}
+    		printf("\r\n");
         } else {
         	if(proc->stdin != 0) close(proc->stdin);
 	        if(proc->stdout != 1) close(proc->stdout);

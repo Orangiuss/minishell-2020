@@ -32,6 +32,6 @@ int cwd(int fdout, int fderr);
 
 int is_builtin(char *cmd);
 
-void exec_builtin(char **built_in);
+void exec_builtin(char **built_in, int fdout, int fderr);
 
 #endif
