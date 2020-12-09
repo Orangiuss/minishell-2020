@@ -11,16 +11,16 @@
 /*
     Fichier process.h : En-tête des fonctions de gestion des
                         processus indépendants.
-    Groupe : n° 23
+    Groupe : n° 34
     Auteur : FERKIOUI Karim
     Dépendances : unistd
  */
 
 /*
- Structure processus_t permettant de décrire les paramètres d'un
- processus lancé ou à lancer (PID, stdin, stdout, status, ...)
-    Champs XXX :
-    ...
+Structure processus_t permettant de décrire les paramètres d'un
+processus lancé ou à lancer (PID, stdin, stdout, status, ...)
+Background est égal à 1 quand le processus doit s'executer en arrière plan 
+et 0 quand il n'est pas en arrière plan
  */
 typedef struct processus_t {
     pid_t pid;

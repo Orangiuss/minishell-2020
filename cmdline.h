@@ -1,21 +1,21 @@
 #ifndef CMDLINE_H
 #define CMDLINE_H
 
+#include "processus.h"
+#include "utils.h"
+
 /*
     Fichier cmdline.h : En-tête des fonctions de gestion de
                         la ligne de commande.
-    Groupe : n° X
-    Auteur :
-    Dépendances :
+    Groupe : n° 34
+    Auteurs : FERKIOUI Karim - DUFOUR Richard
+    Dépendances : processus.h, utils.h
  */
-
-
-#include "processus.h"
 
 /*
   Fonction init_process : Crée l'enchaînement de processus à partir du
                           tableau tokens
-      Paramètre proc : pointeur sur la structure à remplir
+  Paramètre proc : pointeur sur la structure à remplir
       Paramètre tokens :  tableau (NULL-terminated) contenant les chaînes
                           de la ligne de commande à analyser
       Retourne 0 en cas de succés et une autre valeur en cas d'échec

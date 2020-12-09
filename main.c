@@ -3,6 +3,13 @@
 #include "utils.h"
 #include "cmdline.h"
 
+/*
+    Fichier utils.c : Fonctions utilitaires
+    Groupe : n° 34
+    Auteur : FERKIOUI Karim - DUFOUR Richard
+    Dépendances : parser.h, processus.h, utils.h, cmdline.h
+ */
+
 int main(int argc, char **argv, char **envp)
 {
 	char str[MAX_LINE_SIZE];
@@ -13,34 +20,26 @@ int main(int argc, char **argv, char **envp)
 
 	while(1) {
         if (getcwd(cwd, sizeof(cwd)) != NULL) {
-           printf("karim@minishell:");
-           printf("\033[31m\033[1m%s\033[0m~$ ", cwd);
+        	char *USER;
+        	if (USER=getenv("USER")) 
+        	{
+        		printf("\033[32m\033[1m%s\033[0m", USER); // Si on obtient l'user on l'affiche
+        	}
+ 	        printf("\033[92m@minishell:\033[0m"); 
+            printf("\033[34m\033[1m%s\033[0m~$ ", cwd); // On affiche le repertoire courant
         } else {
             perror("getcwd()");
         }
-    	fgets(str, MAX_ARGS, stdin);
-    	printf("%s", str);
+    	fgets(str, MAX_ARGS, stdin); // On obtient l'entrée standard
     	strtok(str, "\n");
-    	int nombreArgs = tokenize_str(str, tokens);
+    	trim_str(str);
+    	clean_str(str);
+    	tokenize_str(str, tokens);
     	env_str(tokens);
-
-        /*clear_tokens(proc.argv);
-        proc.stdin = 0;
-        proc.stdout = 1;
-        proc.stderr = 2;
-        proc.next = NULL;
-        proc.next_success = NULL;
-        proc.next_failure = NULL;
-
-	    for(int i = 0; i < nombreArgs; i++) {
-	    	proc.argv[i] = tokens[i];
-	    }
-
-	    int file = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0440);
-	    proc.background = 0;*/
 
         init_process(proc, tokens);
         exec_cmdline(proc);
+        clear_tokens(tokens);
     }
 
 	return 0;

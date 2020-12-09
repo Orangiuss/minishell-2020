@@ -3,12 +3,10 @@
 
 /*
     Fichier utils.h : En-tête des fonctions utilitaires
-    Groupe : n° X
-    Auteur :
-    Dépendances :
+    Groupe : n° 34
+    Auteur : FERKIOUI Karim
+    Dépendances : parser.h
  */
-
-#include <stdlib.h>
 
 #include "parser.h"
 

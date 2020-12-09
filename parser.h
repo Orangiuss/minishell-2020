@@ -9,9 +9,9 @@
 /*
     Fichier parser.h : En-tête des fonctions de traitement de
                       la ligne de commande
-    Groupe : n° 23
-    Auteur : FERKIOUI Karim
-    Dépendances :
+    Groupe : n° 34
+    Auteurs : FERKIOUI Karim
+    Dépendances : stdio.h, stdlib.h, string.h, ctype.h
  */
 
 // Nombre maximum de caractères d'une ligne
@@ -44,7 +44,6 @@ int clean_str(char *str);
       Retourne le nombre de chaînes dans tokens
  */
 int tokenize_str(char *str, char *tokens[]);
-
 
 /*
   Fonction env_str :  Remplace les noms des variables d'environnement par
